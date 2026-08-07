@@ -1,0 +1,60 @@
+{
+  "url": "http://127.0.0.1:5173/",
+  "httpStatus": 200,
+  "canvasCount": 1,
+  "canvasSize": {
+    "x": 79,
+    "y": 668.4375,
+    "width": 512,
+    "height": 512
+  },
+  "console": [
+    {
+      "type": "debug",
+      "text": "Shader constructor took 1.5 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.7000000029802322 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 1 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='custom' and ray depth='7'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 3.6000000089406967 ms."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x17c4001bf200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x17c4001bf200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x17c4001bf200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x17c4001bf200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "chromiumVersion": "151.0.7922.34"
+}
