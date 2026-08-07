@@ -1,0 +1,14 @@
+{
+  "name": "hira-diamond-webgl-gpl",
+  "version": "0.1.0",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "dev": "vite docs --host 0.0.0.0",
+    "build": "node scripts/build.mjs",
+    "preview": "vite dist --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
