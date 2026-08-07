@@ -12,27 +12,37 @@ These instructions apply to the entire repository.
 ## 2. License boundary
 
 - Preserve `LICENSE`, upstream attribution, and the original project link.
-- Record material changes in a future `CHANGELOG.md` before public deployment.
+- Record material changes in `CHANGELOG.md` before public deployment. Use semantic versioning and document GPL-related changes explicitly.
 - Do not remove or hide GPL notices.
 - Do not copy Cafe24 proprietary templates, credentials, customer data, or unrelated HIRA private code into this repository.
-- Treat the viewer as a separately deployed GPL component. Legal review is required before commercial launch.
+- Treat the viewer as a separately deployed GPL component. Legal review is required before commercial launch:
+  - **Process**: Submit to legal team before any public release or commercial deployment.
+  - **Owner**: HIRA Legal/Compliance team.
+  - **Timing**: Must complete at least 2 weeks before planned public release.
+  - **Criteria**: Verify GPL v3 obligations, commercial use compatibility, and corresponding-source publication plan.
 
 ## 3. Current scope
 
-Included in the first implementation phase:
+### Phase 1 — Compatibility gate (blocking)
 
+Included:
 - Validate the upstream desktop and mobile demos.
 - Replace the sample asset manually with one approved HIRA solitaire OBJ package.
-- Add a customer-facing product URL and minimal viewer controls only after the model gate passes.
-- Later, add an admin flow in which the operator explicitly selects metal and diamond files.
+- Prove metal and diamond render correctly without protected-script changes.
+- Document runtime roles of `ring.obj` and `engagement-ring.obj`.
 
-Explicitly excluded unless the user changes scope:
-
+Explicitly excluded in phase 1:
 - GLB material auto-classification.
 - Direct editing, beautifying, or reverse-engineering of `main.min.js` or `page.min.js`.
 - Rebuilding the discontinued BVH/lookup engine.
 - Automatic synchronization of the full Cafe24 product catalog.
-- Deployment, DNS changes, GitHub push, or production publication without explicit approval.
+- Deployment, DNS changes, or production publication.
+
+### Phase 2+ — After compatibility gate
+
+Customer viewer, admin upload, and Cafe24 integration become in-scope ONLY if phase 1 is PASS. See DEFINITION_OF_DONE.md §6-§8 for activation gates.
+
+Each subsequent phase requires explicit user authorization before starting.
 
 ## 4. Protected baseline files
 
@@ -120,5 +130,24 @@ Use at most three active roles for normal implementation:
 - Viewer/model: owns viewer HTML, runtime asset integration, and visual compatibility tests.
 - Admin/API: starts only after the compatibility gate; owns authentication, upload, metadata, and publication APIs.
 
-A fourth reviewer role may run after a milestone, but should not edit files owned by an active implementation agent. Agents must declare file ownership before parallel edits.
+A fourth reviewer role may run after a milestone, but should not edit files owned by an active implementation agent.
+
+### File ownership declaration
+
+Before parallel edits, agents must declare file ownership using this format:
+
+```
+Agent: [name/role]
+Owned files:
+  - path/to/file1
+  - path/to/file2
+Duration: [start date] to [end date or "ongoing"]
+Conflict resolution: [name of lead agent or process]
+```
+
+Store declarations in `docs/AGENT_OWNERSHIP.md`. If two agents edit the same file:
+1. Lead/integration agent resolves the conflict.
+2. Document the resolution and re-assign ownership.
+3. Notify both agents of the result.
+4. Do not merge conflicting changes without explicit resolution.
 

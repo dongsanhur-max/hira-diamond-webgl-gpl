@@ -38,11 +38,15 @@ Every completed task must satisfy all applicable items:
 
 ### Verification
 
-- [ ] The smallest relevant automated checks were executed.
+- [ ] The smallest relevant automated checks were executed. **Minimum checks by task type:**
+  - Documentation-only: `git diff --check`, link validation, status/version verification
+  - Model package: JSON parsing, file naming regex, geometry measurements, metadata inspection
+  - Build/runtime change: `npm run build` exit code 0, expected files exist and non-empty, `git diff --check`
+  - Browser-affecting: above + real browser test or BLOCKED (no responsive viewport substitution)
 - [ ] `npm run build` passes when application source or runtime assets changed.
 - [ ] Expected build files exist and are non-empty.
 - [ ] Browser-affecting changes were tested in a real browser or marked BLOCKED.
-- [ ] Console/network failures were reviewed.
+- [ ] Console/network failures were reviewed and categorized (WARNING/ERROR/FATAL/CRASH per TEST_PLAN.md §5).
 - [ ] Every result is labeled PASS, CONDITIONAL, FAIL, or BLOCKED.
 
 ### Documentation
@@ -127,33 +131,50 @@ This section becomes applicable only after the compatibility gate.
 
 ## 7. Admin upload MVP DONE
 
-This section becomes applicable only after the compatibility gate.
+**Activation gate**: This section applies ONLY after §5 (Compatibility gate DONE) is PASS.
+
+Before this phase starts:
+- [ ] Compatibility gate is PASS (one approved HIRA solitaire loads and renders correctly)
+- [ ] User explicitly authorizes admin development phase
+- [ ] Legal review has addressed GPL implications for deployment
+
+When active, admin upload MVP is DONE only when:
 
 - [ ] Administrator authentication and logout work.
 - [ ] Unauthenticated users cannot access admin APIs or private models.
 - [ ] Product creation defaults to draft/unpublished.
 - [ ] Operator explicitly selects metal and diamond files; no unapproved auto-classification is used.
-- [ ] Naming, JSON, size, and geometry validation run before publication.
+- [ ] Naming, JSON, size, and geometry validation run before publication (per MODEL_AND_FILE_RULES.md).
 - [ ] Admin preview uses the same approved viewer path as customers.
 - [ ] Publish/unpublish transitions are logged and enforced.
 - [ ] Product link generation is deterministic and collision-safe.
-- [ ] Invalid, missing, corrupt, and oversized file paths have tested errors.
-- [ ] Published model replacement supports rollback.
+- [ ] Invalid, missing, corrupt, and oversized file errors have tested recovery paths (per TEST_PLAN.md §12).
+- [ ] Published model replacement supports rollback (version history preserved).
 - [ ] Backup and recovery procedure is documented and tested once.
 - [ ] Secrets remain outside source control.
-- [ ] Security review finds no known critical issue.
+- [ ] Security review finds no known critical issue and documents attack surface.
 
 ## 8. Cafe24/Gabia integration DONE
 
-- [ ] Viewer and admin services use approved independent subdomains.
-- [ ] Existing root and `www` DNS records were captured before changes.
-- [ ] Only authorized viewer/admin records were added.
-- [ ] HTTPS is valid for both services.
+**Activation gate**: This section applies ONLY after §7 (Admin upload MVP DONE) is PASS.
+
+Before this phase starts:
+- [ ] Admin upload MVP is PASS and in production
+- [ ] At least one product has been published through admin interface with 2+ weeks stability
+- [ ] User explicitly authorizes Cafe24 integration work
+- [ ] Legal review has completed deployment/commercial use verification
+
+When active, Cafe24/Gabia integration is DONE only when:
+
+- [ ] Viewer and admin services use approved independent subdomains (approved by DNS owner).
+- [ ] Existing root and `www` DNS records were captured and documented before any changes.
+- [ ] Only authorized viewer/admin records were added; no unrelated records modified.
+- [ ] HTTPS is valid for both services (cert check and browser verification).
 - [ ] Cafe24 product page links to the correct product-specific viewer URL.
 - [ ] Initial integration uses the approved new-window/full-screen approach unless iframe use is separately authorized.
-- [ ] Viewer failure does not break the Cafe24 product page.
-- [ ] A rollback procedure for DNS and the Cafe24 button is documented and tested.
-- [ ] No DNS or production change is made without explicit user authorization.
+- [ ] Viewer failure does not break the Cafe24 product page (fallback/error path tested).
+- [ ] A rollback procedure for DNS and the Cafe24 button is documented and tested once.
+- [ ] No DNS or production change is made without explicit user authorization; all changes logged.
 
 ## 9. Release DONE
 

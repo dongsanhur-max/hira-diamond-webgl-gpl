@@ -47,11 +47,18 @@ Admin upload/API development is blocked until T0–T6 pass or the user explicitl
 
 ### 4.2 Required mobile
 
-- Android Chrome on the user's primary Android phone
-- Samsung Internet on a Samsung test device when available
-- iPhone Safari on one supported iPhone when available
+Confirm device availability before starting T5. At minimum, tests must run on:
+
+- **Android Chrome**: User's primary Android phone (OS version 11+)
+- **iPhone Safari**: One supported iPhone (iOS version 15+) — OPTIONAL during first gate; if unavailable, record CONDITIONAL with explicit user acceptance
 
 If a required device is unavailable, record BLOCKED rather than substituting a desktop responsive viewport.
+
+**Pre-test checklist:**
+- [ ] Android phone model and OS version recorded
+- [ ] iPhone model and iOS version recorded (if available)
+- [ ] All devices can reach the test URL via Wi-Fi and cellular
+- [ ] Device ownership confirmed (no borrowed/shared devices for final gate)
 
 ### 4.3 Network profiles
 
@@ -69,7 +76,11 @@ Each executed browser test stores:
 - device, OS, browser, and browser version;
 - exact URL and model revision;
 - result label;
-- console error text or confirmation that no fatal error appeared;
+- **console output classification**:
+  - WARNING: console.warn() or similar non-blocking messages → record and categorize
+  - ERROR: console.error() → record exact text; determine if blocking
+  - FATAL: WebGL context loss, uncaught exceptions, NaN artifacts, black canvas → blocking failure
+  - CRASH: browser tab/process crash or infinite loop → BLOCKED result
 - screenshot of initial view;
 - screenshot after rotation;
 - short note on zoom/orbit behavior;
@@ -137,10 +148,27 @@ Acceptance:
 
 Record hashes for the six protected minified scripts listed in `AGENTS.md`. Before and after compatibility experiments, compare those hashes.
 
+**Procedure:**
+
+```bash
+# Initial baseline (before any experiments)
+sha256sum docs/script/main.min.js > test-results/baseline-hashes.txt
+sha256sum docs/script/page.min.js >> test-results/baseline-hashes.txt
+sha256sum docs/jewelry/script/main.min.js >> test-results/baseline-hashes.txt
+sha256sum docs/jewelry/script/page.min.js >> test-results/baseline-hashes.txt
+sha256sum docs/jewelery/script/main.min.js >> test-results/baseline-hashes.txt
+sha256sum docs/jewelery/script/page.min.js >> test-results/baseline-hashes.txt
+
+# After experiments
+sha256sum docs/script/main.min.js > test-results/after-hashes.txt
+diff test-results/baseline-hashes.txt test-results/after-hashes.txt
+```
+
 Acceptance:
 
-- protected script hashes are unchanged;
-- any difference is an immediate FAIL until explicitly approved.
+- protected script hashes are unchanged (diff returns no output);
+- any difference is an immediate FAIL until explicitly approved;
+- store both hash files in `test-results/` for record.
 
 ## 7. T1 — Upstream runtime tests
 

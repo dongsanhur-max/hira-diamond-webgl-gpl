@@ -70,7 +70,7 @@ Revision information belongs in Git history and `model-info.json`, not in filena
 - Export metal and diamond as separate OBJ files.
 - Do not include the diamond mesh inside `metal.obj`.
 - Do not include prongs, shank, or basket geometry inside `diamond.obj`.
-- Side stones may be combined in `diamond.obj` for the first manual workflow only if they all use the same diamond role. Record this decision in `model-info.json`.
+- Side stones may be combined in `diamond.obj` during the first compatibility test only if they all use the same diamond role. Record this decision in `model-info.json`. Once the compatibility mapping is proven, auto-classification rules may be added in a separate phase.
 
 ### 5.2 Transform and axis
 
@@ -149,12 +149,20 @@ Use this minimum schema:
 
 Replace placeholder zero values before validation. JSON must parse without comments or trailing commas.
 
+**Numeric precision requirements:**
+- `exportScale`: record to 2 decimal places (e.g., 1.00, 0.95)
+- `boundingBoxMm` (x, y, z): record to 1 decimal place (e.g., 15.2, 8.5, 12.0)
+- All triangle counts must be integers with no decimal point
+- All measurements must be finite (no NaN, Infinity, or negative values for scale/size)
+
 ## 9. Thumbnail rules
 
 - Preferred format: WebP; JPEG is allowed during the first phase.
 - Square canvas, recommended 1200 × 1200 px.
 - Neutral HIRA background and sufficient whitespace.
 - No customer names, order numbers, watermarks, EXIF location, or private metadata.
+  - **Metadata strip tool**: Use `exiftool -all= thumbnail.webp` (or equivalent) to remove all EXIF, XMP, IPTC metadata before upload.
+  - **Validation**: Verify with `exiftool thumbnail.webp` that no private metadata remains.
 - Thumbnail orientation should match the initial 3D camera view where practical.
 
 ## 10. Upstream runtime mapping
