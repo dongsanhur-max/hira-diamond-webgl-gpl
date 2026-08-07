@@ -1,0 +1,84 @@
+﻿{
+  "method": "x-z lower-shank, center 1% y-slice, inward normal dot < -0.7, algebraic circle fit",
+  "knownHiraInnerDiameterMm": 15,
+  "hiraCrossCheck": {
+    "file": "C:\\Users\\chuck\\Desktop\\ring-001\\metal.obj",
+    "sha256": "c4c965454086e80b34f9ce8a9fecc26eb0901a2efc91a2bca9361eea70e5090e",
+    "bounds": {
+      "min": [
+        -9.07444763,
+        -3.92585349,
+        -9.10000038
+      ],
+      "max": [
+        9.07444763,
+        3.93152738,
+        13.36857796
+      ],
+      "span": [
+        18.14889526,
+        7.85738087,
+        22.46857834
+      ]
+    },
+    "preliminaryCenter": {
+      "x": 0,
+      "y": 0.0028369449999998686,
+      "z": -0.025552750000001012
+    },
+    "centerSliceTolerance": 0.0785738087,
+    "innerNormalDotThreshold": -0.7,
+    "selectedPointCount": 37,
+    "circleFit": {
+      "centerX": -5.613157945730071e-16,
+      "centerZ": -0.008111504448060636,
+      "radius": 7.484913260638706,
+      "diameter": 14.969826521277412,
+      "rmse": 0.004651874152237557
+    },
+    "deviationFromKnownPercent": -0.20115652481725496,
+    "withinOnePercent": true
+  },
+  "upstreamReference": {
+    "file": "C:\\Users\\chuck\\hira-diamond-webgl-gpl-t4c\\docs\\jewelry\\models\\engagement-ring.obj",
+    "sha256": "05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d",
+    "bounds": {
+      "min": [
+        -1.03869,
+        -0.387857,
+        -1.640228
+      ],
+      "max": [
+        1.03869,
+        0.386109,
+        0.839558
+      ],
+      "span": [
+        2.07738,
+        0.7739659999999999,
+        2.479786
+      ]
+    },
+    "preliminaryCenter": {
+      "x": 0,
+      "y": -0.0008740000000000137,
+      "z": -0.6015380000000001
+    },
+    "centerSliceTolerance": 0.00773966,
+    "innerNormalDotThreshold": -0.7,
+    "selectedPointCount": 90,
+    "circleFit": {
+      "centerX": 2.478969695536826e-9,
+      "centerZ": -0.6033947215569887,
+      "radius": 0.9320706332923532,
+      "diameter": 1.8641412665847064,
+      "rmse": 0.00035248562937919637
+    }
+  },
+  "conversion": {
+    "formula": "upstreamInnerDiameterEngineUnits / knownHiraInnerDiameterMm",
+    "scaleEngineUnitsPerMm": 0.12427608443898043,
+    "inverseMmPerEngineUnit": 8.046600474373653,
+    "predictedScaledHiraMeasuredDiameter": 1.8603914247951603
+  }
+}

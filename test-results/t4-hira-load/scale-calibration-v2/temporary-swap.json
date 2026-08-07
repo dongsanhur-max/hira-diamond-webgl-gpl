@@ -1,0 +1,8 @@
+﻿{
+    "date":  "2026-08-07T19:22:51.7289648+09:00",
+    "target":  "docs\\jewelry\\models\\engagement-ring.obj",
+    "upstreamBeforeSha256":  "05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d",
+    "adapterExpectedSha256":  "93c0cdb7ada78efe7b791f73aa5d7ab7f6dc6fc3a0cf07e1bdb0c848cec8fdff",
+    "targetAfterSwapSha256":  "93c0cdb7ada78efe7b791f73aa5d7ab7f6dc6fc3a0cf07e1bdb0c848cec8fdff",
+    "exactAdapterInstalled":  true
+}

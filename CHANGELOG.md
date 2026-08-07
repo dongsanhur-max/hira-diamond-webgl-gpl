@@ -17,6 +17,7 @@ All notable modifications to the upstream GPL `diamond-webgl` baseline are recor
 ### Changed
 
 - Declared `docs/jewelry/` as the canonical jewelry demo path while preserving the upstream `docs/jewelery/` path.
+- Replaced the experimental HIRA adapter's bounding-box-diagonal scale estimate with a documented 15 mm inner-band calibration (`0.12427608443898043` engine units per millimeter) and recorded fresh T4 runtime, interaction, restoration, and limitation evidence without changing the protected engine.
 
 ### Security
 

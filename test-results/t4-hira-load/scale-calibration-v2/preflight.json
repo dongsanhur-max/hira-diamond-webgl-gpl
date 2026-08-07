@@ -1,0 +1,9 @@
+﻿{
+    "date":  "2026-08-07T19:11:07.3182929+09:00",
+    "branch":  "compat/t4c-scale-calibration",
+    "commit":  "d8bf2495869d4abc0a4aed369c69e9f7d1e2517f",
+    "upstreamEngagementRingSha256":  "05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d",
+    "metalSha256":  "c4c965454086e80b34f9ce8a9fecc26eb0901a2efc91a2bca9361eea70e5090e",
+    "diamondSha256":  "f8506e5680e54c24e58897e92fe7539244a04a3622058b7d64cf5f397eca72de",
+    "protectedHashExitCode":  0
+}

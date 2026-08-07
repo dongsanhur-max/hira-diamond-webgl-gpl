@@ -1,0 +1,174 @@
+{
+  "date": "2026-08-07T10:24:04.222Z",
+  "url": "http://127.0.0.1:5173/jewelry/",
+  "viewport": {
+    "width": 900,
+    "height": 900
+  },
+  "browser": "151.0.7922.34",
+  "responses": [
+    {
+      "url": "http://127.0.0.1:5173/jewelry/models/engagement-ring.obj?v=2024-01-15T21%3A01%3A16.110Z",
+      "status": 200,
+      "bodySha256": "93c0cdb7ada78efe7b791f73aa5d7ab7f6dc6fc3a0cf07e1bdb0c848cec8fdff"
+    },
+    {
+      "url": "http://127.0.0.1:5173/jewelry/models/engagement-ring.obj?v=2024-01-15T21%3A01%3A16.110Z",
+      "status": 200,
+      "bodySha256": "93c0cdb7ada78efe7b791f73aa5d7ab7f6dc6fc3a0cf07e1bdb0c848cec8fdff"
+    }
+  ],
+  "failedRequests": [],
+  "console": [
+    {
+      "type": "debug",
+      "text": "Shader constructor took 1 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.7000000029802322 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.3999999910593033 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.29999999701976776 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.9000000059604645 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.5999999940395355 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.8999999910593033 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='cushion' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 3.2999999970197678 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='emerald' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 90.09999999403954 ms."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "Retrieving of support model 'engagement-ring.obj' took 107.29999999701977 ms."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.3999999910593033 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.29999999701976776 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.20000000298023224 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.19999998807907104 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.20000000298023224 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.20000000298023224 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.29999999701976776 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='cushion' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.5 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='emerald' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 87.30000001192093 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Retrieving of support model 'engagement-ring.obj' took 94.5 ms."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  ],
+  "pageErrors": [],
+  "captures": [
+    {
+      "name": "full-lighting-initial",
+      "file": "full-lighting-initial.png",
+      "sha256": "05f7765b448618e25313b24556fd7d10ef756c6fd4e0f0defde6ea09aeeb089f"
+    },
+    {
+      "name": "full-lighting-rotated",
+      "file": "full-lighting-rotated.png",
+      "sha256": "7c96743383926ea637ebbaf1ecd99ef4ffd800d4b454cc6f8ecb63d66f82b858"
+    },
+    {
+      "name": "full-lighting-zoomed",
+      "file": "full-lighting-zoomed.png",
+      "sha256": "ac8b3461ecdad53306d82622bdc6249173f392bf8475970953def732cfc7051c"
+    }
+  ],
+  "fullLighting": {
+    "geometryOnlyRequested": false,
+    "geometryOnlyChecked": false,
+    "rotation": {
+      "deltaX": 150,
+      "deltaY": -50,
+      "steps": 20
+    },
+    "zoom": {
+      "wheelEvents": 5,
+      "deltaYEach": -300
+    },
+    "canvasBox": {
+      "x": 194,
+      "y": 388.4375,
+      "width": 512,
+      "height": 512
+    }
+  },
+  "driverFatal": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('label[for=\"only-normals-checkbox-id\"]')\u001b[22m\n\u001b[2m    - locator resolved to <label class=\"checkmark\" for=\"only-normals-checkbox-id\"></label>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at interactAndCapture (C:\\Users\\chuck\\hira-diamond-webgl-gpl-t4c\\test-results\\t4-hira-load\\scale-calibration-v2\\run-browser-check.cjs:39:65)\n    at async C:\\Users\\chuck\\hira-diamond-webgl-gpl-t4c\\test-results\\t4-hira-load\\scale-calibration-v2\\run-browser-check.cjs:100:26"
+}

@@ -1,0 +1,43 @@
+﻿{
+    "buildExitCode":  0,
+    "protectedHashExitCode":  0,
+    "requiredOutputs":  [
+                            {
+                                "path":  "dist\\index.html",
+                                "exists":  true,
+                                "bytes":  34198
+                            },
+                            {
+                                "path":  "dist\\script\\main.min.js",
+                                "exists":  true,
+                                "bytes":  159679
+                            },
+                            {
+                                "path":  "dist\\jewelry\\index.html",
+                                "exists":  true,
+                                "bytes":  22279
+                            },
+                            {
+                                "path":  "dist\\jewelry\\script\\main.min.js",
+                                "exists":  true,
+                                "bytes":  244310
+                            },
+                            {
+                                "path":  "dist\\jewelry\\models\\ring.obj",
+                                "exists":  true,
+                                "bytes":  444480
+                            },
+                            {
+                                "path":  "dist\\jewelry\\models\\engagement-ring.obj",
+                                "exists":  true,
+                                "bytes":  1366647
+                            },
+                            {
+                                "path":  "dist\\jewelry\\textures\\skybox.jpg",
+                                "exists":  true,
+                                "bytes":  9682
+                            }
+                        ],
+    "restoredSourceSha256":  "05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d",
+    "restoredDistSha256":  "05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d"
+}

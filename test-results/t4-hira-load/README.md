@@ -147,3 +147,108 @@ scale constant from a known reference dimension rather than a bounding-box
 approximation, and (2) decide whether distinct metal/diamond rendering is
 achievable without protected-script changes at all, or whether that requires
 an explicitly approved protected-script change proposal per `AGENTS.md` §4.
+
+## T4c scale calibration v2 (2026-08-07)
+
+Branch: `compat/t4c-scale-calibration`
+
+T4c result: **CONDITIONAL**. The scale constant is now derived from a known
+15 mm CAD ring-size dimension rather than a bounding-box diagonal, but the
+unchanged T4 material-role result remains **FAIL**, initial-camera fit is
+**FAIL**, and user visual approval remains **BLOCKED**. This section does not
+declare the overall T4 gate PASS.
+
+### Measurement method and dimensional correction
+
+The source package stayed outside the repository at
+`C:\Users\chuck\Desktop\ring-001\`. The reproducible Node measurement in
+[`scale-calibration-v2/measure-inner-band.mjs`](scale-calibration-v2/measure-inner-band.mjs)
+uses the same definition for both meshes:
+
+1. treat `x-z` as the ring plane and `y` as band width;
+2. select the lower shank in the center 1% `y` slice;
+3. retain vertices whose projected normal points inward (`dot < -0.7`);
+4. fit a circle to those `x-z` points.
+
+Raw output is in [`measurement.json`](scale-calibration-v2/measurement.json).
+
+| Measurement | Value | Fit evidence |
+| --- | ---: | ---: |
+| HIRA `metal.obj` inner diameter | `14.969826521277412 mm` | 37 points, RMSE `0.004651874152237557 mm` |
+| Difference from documented 15 mm | `-0.20115652481725496%` | Within the 1% model tolerance |
+| Upstream `engagement-ring.obj` inner diameter | `1.8641412665847064 engine units` | 90 points, RMSE `0.00035248562937919637` |
+
+The task brief's literal ratio is preserved as the inverse conversion:
+
+```text
+15 mm / 1.8641412665847064 engine units
+= 8.046600474373653 mm per engine unit
+```
+
+`merge-hira-model.mjs --scale` multiplies millimeter vertex positions and
+therefore requires the reciprocal unit direction:
+
+```text
+adapter scale
+= 1.8641412665847064 engine units / 15 mm
+= 0.12427608443898043 engine units per mm
+```
+
+Passing `8.046600...` to `--scale` would enlarge the millimeter model and is
+dimensionally incorrect. The generated adapter used the reciprocal
+`0.12427608443898043` without rounding. It has 3,398 vertices, 3,398 normals,
+5,086 faces, no unsupported records, and SHA-256
+`93c0cdb7ada78efe7b791f73aa5d7ab7f6dc6fc3a0cf07e1bdb0c848cec8fdff`.
+See [`adapter-generation.json`](scale-calibration-v2/adapter-generation.json)
+and [`adapter-validation.json`](scale-calibration-v2/adapter-validation.json).
+
+### Fresh runtime evidence
+
+The browser fetched the exact adapter hash twice with HTTP 200. Chromium
+`151.0.7922.34` reported no failed requests or page errors. General-lighting
+and Geometry-only initial/rotated/zoomed hashes were all distinct; zoom used
+five in-canvas wheel events at `deltaY=-300` each. The Geometry-only checkbox
+was independently confirmed checked. Full details are in
+[`browser-runtime.json`](scale-calibration-v2/browser-runtime.json).
+
+- [full-lighting-initial.png](scale-calibration-v2/full-lighting-initial.png)
+- [full-lighting-rotated.png](scale-calibration-v2/full-lighting-rotated.png)
+- [full-lighting-zoomed.png](scale-calibration-v2/full-lighting-zoomed.png)
+- [geometry-only-initial.png](scale-calibration-v2/geometry-only-initial.png)
+- [geometry-only-rotated.png](scale-calibration-v2/geometry-only-rotated.png)
+- [geometry-only-zoomed.png](scale-calibration-v2/geometry-only-zoomed.png)
+
+The fresh captures visibly show the HIRA band and basket, but the crown is
+clipped at the top edge in the initial camera. The unchanged scene also draws
+its nine procedural gems over the support model. Because the merged HIRA
+diamond uses the same support shader as the metal, these captures cannot
+independently prove HIRA center-stone/prong alignment. That visual criterion
+is reported BLOCKED rather than inferred from the triangle counter.
+
+Two failed harness attempts are retained under `attempt1-toggle-failed/` and
+`attempt2-hidden-control/`. They failed only to enable Geometry-only and are
+not used as passing evidence.
+
+### Updated T4 checks
+
+| Criterion | Result | Fresh evidence / impact / next action |
+| --- | --- | --- |
+| Calibrated scale from a real reference dimension | PASS | 15 mm CAD anchor cross-checks at 14.9698 mm (`-0.201%`); same center-slice method gives upstream diameter 1.8641413 units and adapter scale 0.12427608443898043. |
+| Model assembly maintains position, scale, and orientation | PASS | The adapter applies one uniform positive scale to both explicit source roles with no recentering or rotation; band and basket remain assembled while rotating. |
+| Model fits the initial camera view | FAIL | The crown/basket reaches beyond the top canvas edge in `full-lighting-initial.png` and `geometry-only-initial.png`. Impact: incomplete first view. Next action: separately authorize/configure initial camera framing without changing protected scripts. |
+| Orbit and zoom remain usable | PASS | Distinct initial/rotated/zoomed hashes in both modes; 20-step drag and five real wheel events recorded. |
+| No missing mesh, black canvas, NaN artifact, or fatal console error | CONDITIONAL | Canvas renders, adapter contains no non-finite values, OBJ requests are HTTP 200, and there are no page errors/failed requests. The merged HIRA diamond cannot be visually isolated from metal under the shared support shader, so individual diamond visibility remains unproven. Owner: viewer/model. Next action: material-role decision remains separate. |
+| Protected script hashes unchanged | PASS | All six files report `OK` before and after; see `protected-hashes-before.txt` and `protected-hashes-after.txt`. |
+| Upstream sample restored and rendered | PASS | Restored source and built output both match `05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d`; restored browser response has the same hash and all runtime assertions pass under `upstream-restored/`. |
+| Prongs and basket align with the center stone | BLOCKED | Shared support shading plus the unrelated nine-gem procedural overlay prevents an independent visual judgment of the HIRA diamond. No alignment PASS is claimed from parsing or shared origin alone. |
+| Approved product silhouette is preserved | BLOCKED | Automated inspection records a recognizable ring and the initial-view clipping, but final silhouette approval belongs to the user. |
+| Metal and diamond display in intended distinct roles | FAIL | Unchanged existing T4/T4b result: the protected upstream loader renders the merged OBJ with one support shader. This task did not re-investigate or alter it. |
+| Visual approval of position, scale, and orientation | BLOCKED | Awaiting the user's review of the six fresh screenshots. |
+
+### Restoration and regression
+
+The temporary swap is recorded in `temporary-swap.json`. The upstream file
+was restored to the known hash in `restoration.json` before the final build.
+`npm run build` passed, all required dist assets are non-empty, and the source
+and dist upstream model hashes match; see `build-output.txt` and
+`postflight.json`.

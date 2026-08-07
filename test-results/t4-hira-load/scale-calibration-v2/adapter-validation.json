@@ -1,0 +1,29 @@
+{
+  "adapterSha256": "93c0cdb7ada78efe7b791f73aa5d7ab7f6dc6fc3a0cf07e1bdb0c848cec8fdff",
+  "bytes": 410577,
+  "counts": {
+    "v": 3398,
+    "vn": 3398,
+    "f": 5086
+  },
+  "bounds": {
+    "min": [
+      -1.12773682,
+      -0.50331817,
+      -1.13091242
+    ],
+    "max": [
+      1.12773682,
+      0.50331817,
+      1.66696195
+    ],
+    "span": [
+      2.25547364,
+      1.00663634,
+      2.7978743699999997
+    ]
+  },
+  "unsupportedRecords": [],
+  "hasMetalSourceMarker": true,
+  "hasDiamondSourceMarker": true
+}

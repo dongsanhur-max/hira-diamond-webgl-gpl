@@ -1,0 +1,6 @@
+﻿docs/script/main.min.js: OK
+docs/script/page.min.js: OK
+docs/jewelry/script/main.min.js: OK
+docs/jewelry/script/page.min.js: OK
+docs/jewelery/script/main.min.js: OK
+docs/jewelery/script/page.min.js: OK
