@@ -252,3 +252,83 @@ was restored to the known hash in `restoration.json` before the final build.
 `npm run build` passed, all required dist assets are non-empty, and the source
 and dist upstream model hashes match; see `build-output.txt` and
 `postflight.json`.
+
+## T4c addendum: camera-fit offset correction (2026-08-07, same day)
+
+This addendum resolves the "Model fits the initial camera view: FAIL" row
+above. It does not change the material-role FAIL or any other criterion.
+
+### Root cause
+
+`measurement.json`'s circle fit recorded not just diameters but the fitted
+circle **centers** for both meshes. The upstream `engagement-ring.obj`'s own
+band/grip-center sits at `x=0, z=-0.6033947215569887` in its own coordinate
+frame -- not at the origin. The v1 scale-only adapter multiplied our source
+coordinates by the scale constant but never translated them, so our ring's
+band-center landed near `(0, 0, -0.001)` (our source model's own local
+origin happens to sit close to its own band-center) while the camera setup
+is built around the upstream convention of `z≈-0.603`. That ~0.602-unit gap
+pushed our crown outside the top of the frame.
+
+### Fix
+
+`scripts/merge-hira-model.mjs` gained `--offset-x`/`--offset-y`/`--offset-z`
+flags: a fixed translation applied to each vertex *after* scaling, in engine
+units. The offset used here is
+`upstreamCenter[axis] - (ourRawCenter[axis] * scale)` for each axis (full
+derivation and source numbers in
+[`camera-fit-offset/adapter-generation.json`](scale-calibration-v2/camera-fit-offset/adapter-generation.json)),
+computed from the same `measurement.json` this task already produced --
+no new measurement pass was needed. This is *not* a recenter-to-origin: it
+specifically matches the upstream model's own off-origin convention, which
+is why recentering the bounding box to `(0,0,0)` would have been the wrong
+fix.
+
+Command used:
+
+```text
+node scripts/merge-hira-model.mjs metal.obj diamond.obj <output.obj> \
+  --scale=0.12427608443898043 \
+  --offset-x=2.479e-9 --offset-y=-0.0012265644163687406 --offset-z=-0.6023866555452744
+```
+
+Resulting adapter: 3,398 vertices, 3,398 normals, 5,086 faces, SHA-256
+`792e06821a5b65bde2a3b04cbd23da26cd6279def3f4492da570ec944cf44e96`.
+
+### Verification
+
+Same protocol as the rest of this report: temporary swap of
+`docs/jewelry/models/engagement-ring.obj`, browser capture, restore, hash
+checks before/after.
+
+- [full-lighting-initial.png](scale-calibration-v2/camera-fit-offset/full-lighting-initial.png) --
+  crown and basket now fully inside the canvas at every margin, compared
+  with the clipped top edge in
+  [`../full-lighting-initial.png`](scale-calibration-v2/full-lighting-initial.png).
+- [full-lighting-rotated.png](scale-calibration-v2/camera-fit-offset/full-lighting-rotated.png) --
+  stays fully framed through a 20-step drag rotation.
+- [full-lighting-zoomed.png](scale-calibration-v2/camera-fit-offset/full-lighting-zoomed.png) --
+  five in-canvas wheel events, no clipping at the closer distance either.
+- [browser-runtime.json](scale-calibration-v2/camera-fit-offset/browser-runtime.json) --
+  HTTP 200 for the adapter OBJ, zero page errors, zero failed requests.
+- Upstream `engagement-ring.obj` restored and hash-confirmed
+  (`05714a046ba1338948dfc02e936626a90c8fbedc11973ff8d494cb1bd4756c4d`);
+  `npm run build` and the six-file protected-script check both passed again
+  after restoration.
+
+Not independently re-verified this round: Geometry-only mode (the checkbox
+click in this session's script did not reliably register against a fresh
+page load, so no Geometry-only screenshot is claimed here as passing
+evidence -- the full-lighting captures above are the basis for this
+result). The existing material-role FAIL is unaffected by this fix and was
+not re-investigated, consistent with the rest of this report.
+
+### Updated criterion
+
+| Criterion | Result | Evidence |
+| --- | --- | --- |
+| Model fits the initial camera view | PASS | Crown/basket fully inside the frame at initial, rotated, and zoomed views with the offset-corrected adapter; see screenshots above. Supersedes the FAIL recorded earlier in this file. |
+
+Overall T4c result is unchanged at **CONDITIONAL**: this addendum closes one
+FAIL, but the metal/diamond material-role FAIL and the user visual-approval
+BLOCKED item remain open, and the overall T4 gate is still not PASS.

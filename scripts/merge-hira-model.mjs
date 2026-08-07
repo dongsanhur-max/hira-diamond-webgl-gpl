@@ -3,7 +3,8 @@ import path from "node:path";
 
 function usage() {
   console.error(
-    "Usage: node scripts/merge-hira-model.mjs <metal.obj> <diamond.obj> <output.obj> [--scale=1.0]"
+    "Usage: node scripts/merge-hira-model.mjs <metal.obj> <diamond.obj> <output.obj> " +
+      "[--scale=1.0] [--offset-x=0] [--offset-y=0] [--offset-z=0]"
   );
   process.exitCode = 1;
 }
@@ -33,7 +34,7 @@ function rewriteFace(face, offsets) {
   return `${rewrittenVertex}//${offsetIndex(normal, offsets.vn)}`;
 }
 
-function mergeSource(sourcePath, label, offsets, scale) {
+function mergeSource(sourcePath, label, offsets, scale, translate) {
   const text = fs.readFileSync(sourcePath, "utf8");
   const lines = text.split(/\r?\n/);
   const output = [`# HIRA runtime adapter source: ${label} (${path.basename(sourcePath)})`];
@@ -49,14 +50,23 @@ function mergeSource(sourcePath, label, offsets, scale) {
     const [keyword, ...values] = trimmed.split(/\s+/);
     if (keyword === "v") {
       counts.v += 1;
-      // Uniform position scale only (direction of vn is unaffected by a
-      // uniform positive scale, so normals are passed through unscaled).
-      const scaled = values.map((component) => {
+      // Uniform position scale (direction of vn is unaffected by a uniform
+      // positive scale, so normals are passed through unscaled), then a
+      // fixed post-scale translation in engine units -- this is NOT a
+      // recenter-to-origin: it aligns this model's own band/grip-center
+      // (measured separately, e.g. via measure-inner-band.mjs's circle fit)
+      // with the position the upstream scene's fixed camera actually frames,
+      // which measurement showed is not the coordinate origin.
+      if (values.length < 3) {
+        throw new Error(`${sourcePath}: vertex has fewer than three components`);
+      }
+      const axisOffsets = [translate.x, translate.y, translate.z];
+      const scaled = values.map((component, i) => {
         const num = Number(component);
         if (!Number.isFinite(num)) {
           throw new Error(`${sourcePath}: non-finite vertex component "${component}"`);
         }
-        return (num * scale).toFixed(8);
+        return (num * scale + (axisOffsets[i] ?? 0)).toFixed(8);
       });
       output.push(`v ${scaled.join(" ")}`);
       continue;
@@ -90,6 +100,7 @@ function mergeSource(sourcePath, label, offsets, scale) {
 
 const positional = [];
 let scale = 1.0;
+const translate = { x: 0, y: 0, z: 0 };
 for (const arg of process.argv.slice(2)) {
   const scaleMatch = arg.match(/^--scale=(.+)$/);
   if (scaleMatch) {
@@ -97,6 +108,16 @@ for (const arg of process.argv.slice(2)) {
     if (!Number.isFinite(scale) || scale <= 0) {
       throw new Error(`--scale must be a finite positive number, got "${scaleMatch[1]}"`);
     }
+    continue;
+  }
+  const offsetMatch = arg.match(/^--offset-([xyz])=(.+)$/);
+  if (offsetMatch) {
+    const [, axis, raw] = offsetMatch;
+    const value = Number(raw);
+    if (!Number.isFinite(value)) {
+      throw new Error(`--offset-${axis} must be a finite number, got "${raw}"`);
+    }
+    translate[axis] = value;
     continue;
   }
   positional.push(arg);
@@ -112,14 +133,15 @@ if (!metalPath || !diamondPath || !outputPath) {
     throw new Error("Output path must differ from both source OBJ paths.");
   }
 
-  const metal = mergeSource(inputs[0], "metal", { v: 0, vt: 0, vn: 0 }, scale);
-  const diamond = mergeSource(inputs[1], "diamond", metal.counts, scale);
+  const metal = mergeSource(inputs[0], "metal", { v: 0, vt: 0, vn: 0 }, scale, translate);
+  const diamond = mergeSource(inputs[1], "diamond", metal.counts, scale, translate);
   fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.writeFileSync(output, `${metal.text}\n${diamond.text}\n`, "utf8");
 
   console.log(JSON.stringify({
     output,
     scale,
+    translate,
     metal: metal.counts,
     diamond: diamond.counts,
   }, null, 2));

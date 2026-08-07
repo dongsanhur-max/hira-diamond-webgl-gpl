@@ -1,0 +1,28 @@
+{
+  "command": "node scripts/merge-hira-model.mjs metal.obj diamond.obj <output.obj> --scale=0.12427608443898043 --offset-x=2.479e-9 --offset-y=-0.0012265644163687406 --offset-z=-0.6023866555452744",
+  "scale": 0.12427608443898043,
+  "translate": {
+    "x": 2.479e-9,
+    "y": -0.0012265644163687406,
+    "z": -0.6023866555452744
+  },
+  "derivation": {
+    "method": "Align this model's own band/grip-center (measured by measure-inner-band.mjs's circle fit and preliminaryCenter) with the position the upstream engagement-ring.obj's equivalent center occupies in its own coordinate frame, after scaling. This is NOT recentering to the origin -- the upstream model's own circle-fit/bbox center is itself offset from (0,0,0), so matching the origin would not have matched the camera's actual framing.",
+    "sourceMeasurements": "test-results/t4-hira-load/scale-calibration-v2/measurement.json",
+    "ourRawCenterMm": { "x": -5.613157945730071e-16, "y": 0.0028369449999998686, "z": -0.008111504448060636 },
+    "upstreamCenterEngineUnits": { "x": 2.478969695536826e-9, "y": -0.0008740000000000137, "z": -0.6033947215569887 },
+    "offsetFormula": "translate[axis] = upstreamCenter[axis] - (ourRawCenter[axis] * scale)"
+  },
+  "adapterSha256": "792e06821a5b65bde2a3b04cbd23da26cd6279def3f4492da570ec944cf44e96",
+  "vertices": 3398,
+  "normals": 3398,
+  "faces": 5086,
+  "boundingBoxEngineUnits": {
+    "min": [-1.12773682, -0.50454473, -1.73329907],
+    "max": [1.12773682, 0.50209160, 1.06457529]
+  },
+  "upstreamBoundingBoxEngineUnitsForComparison": {
+    "min": [-1.03869, -0.387857, -1.640228],
+    "max": [1.03869, 0.386109, 0.839558]
+  }
+}
