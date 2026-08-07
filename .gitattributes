@@ -14,3 +14,6 @@ docs/jewelery/script/page.min.js -text
 # sha256sum's filename parsing breaks if this manifest itself has
 # CRLF line endings; keep it LF regardless of checkout platform.
 docs/baseline/protected-scripts.sha256 text eol=lf
+
+# Keep the T3 marker byte-stable because its recorded SHA-256 is evidence.
+test-results/t3-runtime-mapping/marker-cube.obj text eol=lf
