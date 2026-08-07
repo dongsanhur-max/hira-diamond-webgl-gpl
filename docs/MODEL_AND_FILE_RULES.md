@@ -1,6 +1,6 @@
 # HIRA Model and File Rules
 
-Status: v1.0 — compatibility-gate rules  
+Status: v1.1 — compatibility-gate rules
 Applies to: HIRA jewelry assets submitted for the GPL diamond-webgl viewer
 
 ## 1. Purpose
@@ -70,7 +70,8 @@ Revision information belongs in Git history and `model-info.json`, not in filena
 - Export metal and diamond as separate OBJ files.
 - Do not include the diamond mesh inside `metal.obj`.
 - Do not include prongs, shank, or basket geometry inside `diamond.obj`.
-- Side stones may be combined in `diamond.obj` for the first manual workflow only if they all use the same diamond role. Record this decision in `model-info.json`.
+- During the compatibility gate, side stones may be combined in `diamond.obj` only when they all use the same diamond role. Record this decision in `model-info.json`.
+- After the compatibility gate, the same explicit-role rule remains the default. Any automated grouping/classification requires a separately approved specification, a representative-model test set, zero unresolved role swaps, and a rollback path before it may replace manual assignment.
 
 ### 5.2 Transform and axis
 
@@ -149,6 +150,12 @@ Use this minimum schema:
 
 Replace placeholder zero values before validation. JSON must parse without comments or trailing commas.
 
+Numeric precision:
+
+- `exportScale` must be a finite positive JSON number, use no more than six decimal places, and reproduce the intended size within the 1% scale tolerance. Use `1.0` when no scale conversion was applied.
+- `boundingBoxMm` values use millimeters and no more than three decimal places.
+- Triangle counts and revisions are non-negative integers; do not encode numeric values as strings.
+
 ## 9. Thumbnail rules
 
 - Preferred format: WebP; JPEG is allowed during the first phase.
@@ -156,6 +163,8 @@ Replace placeholder zero values before validation. JSON must parse without comme
 - Neutral HIRA background and sufficient whitespace.
 - No customer names, order numbers, watermarks, EXIF location, or private metadata.
 - Thumbnail orientation should match the initial 3D camera view where practical.
+- Validate metadata before acceptance with `exiftool -G1 -a -s thumbnail.webp` (or the JPEG filename). The output must not contain GPS, owner/author, serial number, customer, order, comment, or other private fields.
+- If `exiftool` is unavailable, mark metadata inspection BLOCKED; visual inspection alone is not a substitute.
 
 ## 10. Upstream runtime mapping
 
@@ -201,6 +210,7 @@ Mark each item `PASS`, `CONDITIONAL`, `FAIL`, or `BLOCKED`.
 - [ ] Thumbnail and reference views match the intended HIRA design.
 - [ ] Prongs, stone count, center-stone ratio, basket height, and silhouette are approved.
 - [ ] No unapproved design change was introduced during optimization.
+- [ ] Thumbnail metadata was inspected with `exiftool`; command output or a redacted report is attached to the test evidence.
 
 ## 12. Compatibility acceptance test
 
@@ -216,6 +226,8 @@ A submitted model is not runtime-approved until all mandatory items pass:
 - the user visually approves the result.
 
 If any mandatory criterion is `FAIL`, do not start the admin upload system. If a criterion is `BLOCKED`, report it as unverified rather than treating it as success.
+
+The required device/browser matrix is defined only in `TEST_PLAN.md` §4.2. Model acceptance reports reference that matrix rather than maintaining a second device list here.
 
 ## 13. Change control
 

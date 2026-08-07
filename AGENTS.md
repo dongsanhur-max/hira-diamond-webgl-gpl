@@ -1,5 +1,7 @@
 # HIRA Diamond WebGL — Agent Rules
 
+Status: v1.1
+
 These instructions apply to the entire repository.
 
 ## 1. Project intent
@@ -12,10 +14,13 @@ These instructions apply to the entire repository.
 ## 2. License boundary
 
 - Preserve `LICENSE`, upstream attribution, and the original project link.
-- Record material changes in a future `CHANGELOG.md` before public deployment.
+- Record material changes in `CHANGELOG.md` as part of the same commit or pull request.
 - Do not remove or hide GPL notices.
 - Do not copy Cafe24 proprietary templates, credentials, customer data, or unrelated HIRA private code into this repository.
-- Treat the viewer as a separately deployed GPL component. Legal review is required before commercial launch.
+- Treat the viewer as a separately deployed GPL component.
+- GPL/commercial-release review owner: the HIRA business owner is accountable for commissioning the review; a qualified Korean copyright/software-license lawyer selected by that owner performs it.
+- Review procedure: provide the lawyer with the upstream source/link, `LICENSE`, `CHANGELOG.md`, deployed build, corresponding-source delivery plan, attribution screen, deployment architecture, and all third-party dependency licenses; record the written decision or required actions in a private legal record and record only the completion date/status in the release checklist.
+- Deadline: complete the review before the first customer-accessible commercial URL, Cafe24 link, paid campaign, or production deployment. A repository build or private compatibility test is not commercial launch approval.
 
 ## 3. Current scope
 
@@ -32,6 +37,7 @@ Explicitly excluded unless the user changes scope:
 - Direct editing, beautifying, or reverse-engineering of `main.min.js` or `page.min.js`.
 - Rebuilding the discontinued BVH/lookup engine.
 - Automatic synchronization of the full Cafe24 product catalog.
+- Cafe24/Gabia integration before the compatibility gate passes and the user separately authorizes that phase.
 - Deployment, DNS changes, GitHub push, or production publication without explicit approval.
 
 ## 4. Protected baseline files
@@ -120,5 +126,22 @@ Use at most three active roles for normal implementation:
 - Viewer/model: owns viewer HTML, runtime asset integration, and visual compatibility tests.
 - Admin/API: starts only after the compatibility gate; owns authentication, upload, metadata, and publication APIs.
 
-A fourth reviewer role may run after a milestone, but should not edit files owned by an active implementation agent. Agents must declare file ownership before parallel edits.
+A fourth reviewer role may run after a milestone, but should not edit files owned by an active implementation agent.
 
+Before parallel edits, every agent must post this declaration in the task/PR discussion or shared work log:
+
+```text
+Agent/role:
+Task:
+Owned files or globs:
+Expected handoff:
+Dependencies on other agents:
+```
+
+Rules:
+
+1. Ownership is temporary and task-scoped; it does not grant permission to change protected files.
+2. Two active agents must not claim the same file or overlapping glob.
+3. The lead records declarations and reports the final ownership map in the milestone handoff.
+4. On overlap, both agents stop edits to the affected files, preserve their diffs, and notify the lead.
+5. The lead resolves the conflict by splitting files, sequencing handoffs, or assigning one integrator. No agent resolves it by overwriting another diff.

@@ -1,6 +1,6 @@
 # HIRA Diamond WebGL Test Plan
 
-Status: v1.0 — pre-implementation test contract  
+Status: v1.1 — pre-implementation test contract
 Primary gate: upstream engine compatibility with one HIRA solitaire model
 
 ## 1. Purpose
@@ -47,9 +47,18 @@ Admin upload/API development is blocked until T0–T6 pass or the user explicitl
 
 ### 4.2 Required mobile
 
-- Android Chrome on the user's primary Android phone
-- Samsung Internet on a Samsung test device when available
-- iPhone Safari on one supported iPhone when available
+- Required A: HIRA-owned Xiaomi 14T, current stable Android and Chrome.
+- Required B: HIRA-owned iPhone 14 Pro Max, current supported iOS and Safari.
+- Optional coverage: Samsung Internet on a Samsung device when one is available. Optional coverage does not replace Required A or B.
+
+Before T5 starts, complete and attach this setup checklist to the test record:
+
+- [ ] HIRA confirms both required device models are still available.
+- [ ] Exact OS and browser versions are recorded.
+- [ ] Browser hardware acceleration/WebGL availability is confirmed.
+- [ ] A real HTTPS test URL is reachable on Wi-Fi and mobile data.
+- [ ] Screen recording or screenshots can be captured without customer/private data.
+- [ ] Any unavailable required device is marked BLOCKED and a named replacement is approved by the user before testing.
 
 If a required device is unavailable, record BLOCKED rather than substituting a desktop responsive viewport.
 
@@ -59,6 +68,8 @@ If a required device is unavailable, record BLOCKED rather than substituting a d
 - One throttled/mobile-data observation for loading behavior before customer release
 
 No fixed loading-time promise is set before the first real HIRA model is measured. Record actual transfer size, first visible frame time, and time until controls respond.
+
+After T5 accepts the first HIRA solitaire, establish baseline v1 by recording at least three cold-cache runs per required device on Wi-Fi and one observation on mobile data. Record median and worst observed values for transfer bytes, first visible frame, controls-ready time, and failures. The user approves the baseline; subsequent releases must report regressions against it. A performance budget is not invented from a single run.
 
 ## 5. Required evidence
 
@@ -77,6 +88,17 @@ Each executed browser test stores:
 - issue link or next action for every failure.
 
 Store test reports under `test-results/` when that directory is introduced. Do not commit private customer assets or credentials with the report.
+
+Console classification:
+
+| Class | Meaning | Required result |
+| --- | --- | --- |
+| INFO | Expected diagnostic information with no user impact | Record when relevant |
+| WARNING | Deprecated API, recoverable asset/network issue, or visible degradation without stopped rendering | CONDITIONAL unless proven harmless and documented |
+| ERROR | Unhandled exception, required asset failure, shader compile/link error, or broken required interaction | FAIL |
+| CRASH | Blank/terminated page, browser crash, repeated context loss, or unrecoverable renderer stop | FAIL and stop dependent tests |
+
+Classify by observed impact and root cause, not by console color alone. A browser message labeled “warning” may still be ERROR if required behavior fails.
 
 ## 6. T0 — Repository baseline tests
 
@@ -156,6 +178,16 @@ Acceptance:
 - Confirm the upstream sample jewelry is visible.
 - Record whether both sample OBJ requests return HTTP 200.
 - Record WebGL errors and failed network requests.
+
+Classify WebGL findings as:
+
+- `RENDER_FAILURE`: shader compile/link failure, invalid framebuffer, blank canvas, or required mesh not rendered — FAIL.
+- `CONTEXT_LOSS`: any repeated or unrecovered `webglcontextlost` — FAIL; one recovered event remains CONDITIONAL and requires investigation.
+- `RESOURCE_FAILURE`: required texture/model fetch or GPU allocation failure — FAIL.
+- `PERFORMANCE`: rendering remains correct but interaction, heat, or frame delivery is unacceptable — CONDITIONAL or FAIL using written evidence and user acceptance.
+- `DIAGNOSTIC`: capability/extension message with no demonstrated impact — record as INFO.
+
+HTTP 200 is network evidence only and does not prove successful parsing, GPU upload, or rendering.
 
 ### T1-03 Interaction
 
@@ -329,4 +361,3 @@ Next authorized phase:
 ```
 
 No admin/API work begins unless `Overall gate` is PASS or the user explicitly authorizes advancement with documented CONDITIONAL limitations.
-

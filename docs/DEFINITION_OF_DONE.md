@@ -1,6 +1,6 @@
 # HIRA Diamond WebGL — Definition of Done
 
-Status: v1.0  
+Status: v1.1
 Applies to: every task, milestone, and release in this repository
 
 ## 1. Core rule
@@ -45,6 +45,14 @@ Every completed task must satisfy all applicable items:
 - [ ] Console/network failures were reviewed.
 - [ ] Every result is labeled PASS, CONDITIONAL, FAIL, or BLOCKED.
 
+Minimum checks by change type:
+
+- Documentation only: `git diff --check`, referenced local-file existence, and Markdown link/path review.
+- Runtime HTML/JavaScript/CSS or assets: documentation checks plus `npm run build`, required `dist/` file checks, and a real-browser console/network check.
+- Model package: JSON parse, required-file/naming checks, OBJ measurements/health inspection, thumbnail metadata inspection, and the applicable `TEST_PLAN.md` T2 checks.
+- Build/dependency configuration: clean `npm ci` when feasible, `npm run build`, output checks, and review of dependency/license changes.
+- Admin/API code after activation: unit/integration tests for changed paths, authentication/authorization negative tests, upload validation tests, dependency/security scan, and build/type/style checks provided by the project.
+
 ### Documentation
 
 - [ ] User-visible behavior or workflow changes are documented.
@@ -68,6 +76,8 @@ A documentation task is DONE when:
 - [ ] filenames, commands, and paths match the repository;
 - [ ] `git diff --check` passes;
 - [ ] links and referenced files exist;
+- [ ] Markdown headings, tables, code fences, and relative links render correctly in GitHub preview or an equivalent renderer;
+- [ ] project-provided formatter, linter, or link checker passes when one exists; when none exists, the absence is recorded rather than claiming a style check passed;
 - [ ] the document clearly identifies its status/version;
 - [ ] no application behavior is claimed as tested solely because a document was written.
 
@@ -90,6 +100,8 @@ A model package is DONE only when:
 This status means “source package ready for engine testing,” not “customer runtime approved.”
 
 ## 5. Compatibility gate DONE
+
+`TEST_PLAN.md` is the source of truth for test procedures, environments, evidence, and result classification. This section is only the milestone completion summary; it must not weaken or replace any mandatory `TEST_PLAN.md` criterion.
 
 The compatibility milestone is DONE only when:
 
@@ -141,9 +153,13 @@ This section becomes applicable only after the compatibility gate.
 - [ ] Published model replacement supports rollback.
 - [ ] Backup and recovery procedure is documented and tested once.
 - [ ] Secrets remain outside source control.
-- [ ] Security review finds no known critical issue.
+- [ ] Security review scope covers authentication, authorization, session handling, upload type/size/content validation, path traversal, object access, publication state, secrets, dependency vulnerabilities, logging/privacy, backup, and rollback.
+- [ ] A named security reviewer is recorded in the milestone report; the implementation author may assist but may not be the sole reviewer.
+- [ ] Findings use CVSS v3.1 or v4.0 with the version recorded. No unresolved Critical (9.0–10.0) or High (7.0–8.9) finding is allowed at release; accepted lower findings require owner, rationale, and remediation date.
 
 ## 8. Cafe24/Gabia integration DONE
+
+This section is dormant, not current implementation scope. It becomes applicable only after the compatibility gate in §5 is DONE and the user separately authorizes the Cafe24/Gabia integration phase. Until both conditions are met, no DNS, Cafe24 template/button, iframe, or production-hosting change is permitted.
 
 - [ ] Viewer and admin services use approved independent subdomains.
 - [ ] Existing root and `www` DNS records were captured before changes.
