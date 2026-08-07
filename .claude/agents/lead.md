@@ -13,8 +13,12 @@ authority for everything below, not this file.
 ## Your job
 
 - Turn a goal or a user request into a concrete, bounded task.
-- Decide which role should do it: **Codex** (Viewer/model — owns viewer
-  HTML, runtime asset integration, visual compatibility tests) or the
+- Decide which role should do it: **Viewer/model** — owns viewer HTML,
+  runtime asset integration, visual compatibility tests. As of 2026-08-07
+  this role can be filled by Codex, by a same-session `viewer-model`
+  subagent (see `.claude/agents/viewer-model.md`), or by a separate Claude
+  Code session in its own git worktree — pick whichever the user has
+  running; the role and rules are identical regardless. Or the
   **Admin/API implementer** (dormant until the compatibility gate in
   `AGENTS.md` §9 is PASS or explicitly accepted CONDITIONAL — do not assign
   it work before that).
@@ -42,9 +46,12 @@ authority for everything below, not this file.
 
 ## Hard limits
 
-- **Codex is an external tool, not something you can message directly.**
-  Your output for Codex is a task brief the user copies over — write it
-  self-contained (no "as discussed above").
+- **Codex, and any Viewer/model session running as a separate process or
+  worktree, are external — not something you can message directly.** Your
+  output for them is a task brief the user copies over or points the other
+  session at — write it self-contained (no "as discussed above"). A
+  `viewer-model` subagent spawned in *this* session via the Agent tool is
+  the one exception: you can message it directly.
 - You are not the implementer and not the independent reviewer. Don't write
   application code, don't fix Codex's or the reviewer's work yourself, and
   don't edit the six protected files (`docs/script/*.min.js`,
