@@ -12,10 +12,12 @@ All notable modifications to the upstream GPL `diamond-webgl` baseline are recor
 - Required mobile-device matrix, console/WebGL classifications, and post-T5 performance-baseline procedure.
 - Model metadata, numeric-precision, security-review, agent-ownership, and phased Cafe24/Gabia criteria.
 - Committed SHA-256 manifest and reproducible verification procedure for all six protected minified scripts.
+- T3 runtime-mapping evidence and screenshots for the upstream jewelry OBJ slots.
 
 ### Changed
 
 - Declared `docs/jewelry/` as the canonical jewelry demo path while preserving the upstream `docs/jewelery/` path.
+- Replaced hardcoded GitHub Pages illustration paths in the runtime HTML with repository-relative asset paths.
 
 ### Security
 

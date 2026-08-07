@@ -1,0 +1,39 @@
+{
+  "experiment": "M2",
+  "selectedScene": "engagement-ring",
+  "responses": [
+    {
+      "url": "http://127.0.0.1:5173/jewelry/models/engagement-ring.obj?v=2024-01-15T21%3A01%3A16.110Z",
+      "status": 200,
+      "bytes": 434,
+      "sha256": "48db61ed858d53099781ba454a76b697884649b83421e2ec54d9f2a4fc80ed4f"
+    }
+  ],
+  "indicators": {
+    "triangles-count-indicator-indicator-id": "Triangles: 994",
+    "gem-facets-count-indicator-indicator-id": null,
+    "gems-count-indicator-indicator-id": "Gems: 9"
+  },
+  "console": [
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x5c1c001af200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x5c1c001af200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "Retrieving of support model 'engagement-ring.obj' took 370.20000000298023 ms."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x5c1c001af200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x5c1c001af200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    }
+  ]
+}
