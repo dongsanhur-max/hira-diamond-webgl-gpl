@@ -1,4 +1,4 @@
-﻿{
+{
   "method": "x-z lower-shank, center 1% y-slice, inward normal dot < -0.7, algebraic circle fit",
   "knownHiraInnerDiameterMm": 15,
   "hiraCrossCheck": {
