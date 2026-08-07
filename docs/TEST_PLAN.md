@@ -296,6 +296,8 @@ Exit criterion: each runtime filename has a documented, repeatable geometry/mate
 
 ## 10. T4 — HIRA compatibility acceptance
 
+Related investigation: `test-results/t4b-gem-parametrization/README.md` records a dead-end investigation into reparametrizing the engine's built-in procedural gem shader instead of merging a support-model adapter, as a way to resolve the material-role criterion below. It confirms no `docs/`-only UI change achieves this, and remains recorded evidence rather than an open task.
+
 Mandatory functional checks:
 
 - HIRA metal geometry is visible;
