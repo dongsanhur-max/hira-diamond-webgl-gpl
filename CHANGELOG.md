@@ -7,6 +7,7 @@ All notable modifications to the upstream GPL `diamond-webgl` baseline are recor
 ### Added
 
 - Vite-based static development and build wrapper for the preserved upstream files.
+- Deterministic OBJ merge adapter for the controlled HIRA runtime compatibility experiment, including an optional uniform `--scale` flag needed because HIRA source packages are authored in real-world millimeters while the upstream sample OBJs use a much smaller unrelated engine-unit convention.
 - Repository-wide agent, model/file, test-plan, and definition-of-done rules.
 - Explicit GPL legal-review procedure and commercial-launch deadline.
 - Required mobile-device matrix, console/WebGL classifications, and post-T5 performance-baseline procedure.

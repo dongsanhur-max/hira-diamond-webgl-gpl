@@ -1,0 +1,13 @@
+{
+  "state": {
+    "geometryOnly": true,
+    "autoRotateGems": false,
+    "displayRing": true
+  },
+  "hashes": {
+    "on": "6f9b623b8b2c110b24b19c0db2fd193c070db9d777f86d92574e27592a1fbb04",
+    "off": "685adcae6614d135d662f50d5c8a0c4e3e3709ef46efc36b52eca23d275a8339",
+    "restored": "6f9b623b8b2c110b24b19c0db2fd193c070db9d777f86d92574e27592a1fbb04"
+  },
+  "visibleSupportChangesCanvas": true
+}

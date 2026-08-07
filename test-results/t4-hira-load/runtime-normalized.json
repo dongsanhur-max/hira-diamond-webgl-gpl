@@ -1,0 +1,94 @@
+{
+  "selectedScene": "engagement-ring",
+  "canvas": {
+    "width": 512,
+    "height": 512
+  },
+  "indicators": {
+    "triangles-count-indicator-indicator-id": "Triangles: 982",
+    "gems-count-indicator-indicator-id": "Gems: 9"
+  },
+  "responses": [
+    {
+      "url": "http://127.0.0.1:5173/jewelry/models/engagement-ring.obj?v=2024-01-15T21%3A01%3A16.110Z",
+      "status": 200,
+      "bytes": 486339,
+      "sha256": "d6d539cfdd3fb84346a43fc4e147f54cb71b6d9ed59507ceb0ba235f890ca44b"
+    }
+  ],
+  "requestFailures": [],
+  "console": [
+    {
+      "type": "debug",
+      "text": "Shader constructor took 1.6000000089406967 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.8999999910593033 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.29999999701976776 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.3999999910593033 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.7000000029802322 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.7999999970197678 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.699999988079071 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='cushion' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 3.4000000059604645 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='emerald' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 88.5 ms."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x7804001b7200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x7804001b7200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "Retrieving of support model 'engagement-ring.obj' took 364.09999999403954 ms."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x7804001b7200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x7804001b7200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    }
+  ]
+}
