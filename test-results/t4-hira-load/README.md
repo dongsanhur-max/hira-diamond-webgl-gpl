@@ -332,3 +332,49 @@ not re-investigated, consistent with the rest of this report.
 Overall T4c result is unchanged at **CONDITIONAL**: this addendum closes one
 FAIL, but the metal/diamond material-role FAIL and the user visual-approval
 BLOCKED item remain open, and the overall T4 gate is still not PASS.
+
+## T4c review and gate acceptance (2026-08-07, same day)
+
+Independent review (interactive Claude Code conversation, not the automated
+self-check) re-verified this task end to end in the `hira-diamond-webgl-gpl-t4c`
+worktree: protected-script hashes (6/6 `OK`, independently re-run), a clean
+`npm run build` with all mandatory `dist/` outputs present and non-empty, the
+restored upstream `engagement-ring.obj` hash matching in both `docs/` and
+`dist/`, the scale-derivation arithmetic recomputed independently, all 16
+README evidence links resolving to real files, `node --check` passing on
+`scripts/merge-hira-model.mjs` and both evidence scripts, and no `.obj`/`.mtl`
+source files present in the diff. Working tree was clean (already committed
+and pushed as `e87b614` and `01ce4d7`) at review time.
+
+One finding not caught by the automated self-check: the round-1 evidence
+JSON files (`measurement.json`, `preflight.json`, `postflight.json`,
+`restoration.json`, `temporary-swap.json`,
+`scale-calibration-v2/adapter-generation.json`) carry a UTF-8 BOM and fail
+strict `JSON.parse`, most likely from a PowerShell `ConvertTo-Json | Set-Content`
+call without `-Encoding utf8`. Round-2 (`camera-fit-offset/`) files don't have
+this problem. Cosmetic only -- nothing in the running application reads these
+files -- left as a follow-up cleanup item rather than blocking this review.
+
+The `--offset-x/-y/-z` addition to `scripts/merge-hira-model.mjs` (needed to
+fix the camera-fit FAIL) technically goes beyond the T4c brief's literal
+"only modify the script if you find an actual defect... do not refactor"
+instruction for the scale-calibration step, since it's a new feature aimed at
+a different, also-in-brief-scope check ("model fits the initial camera
+view"). Reviewed and accepted: the file was in the task's owned-files list,
+the change is additive and backward-compatible (verified: a bare `--scale`
+invocation with no offset flags reproduces the prior adapter hash exactly),
+and it's in direct service of a check the brief explicitly asked to be
+re-verified.
+
+**User visual review:** the user viewed
+`camera-fit-offset/full-lighting-initial.png`, `-rotated.png`, and
+`-zoomed.png` directly in the review conversation on 2026-08-07 and confirmed
+the T4c CONDITIONAL result stands as-is. The user separately decided **not**
+to pursue a protected-script change proposal (`AGENTS.md` §4) for the
+metal/diamond material-role FAIL at this time -- it remains open, accepted as
+a known CONDITIONAL limitation, and work proceeds to other gate items instead.
+This satisfies `TEST_PLAN.md`'s requirement that CONDITIONAL results carry
+written user acceptance before the phase advances; it is not a full T4 PASS,
+and `DEFINITION_OF_DONE.md` §5's "metal and diamond appear in intended roles"
+criterion remains unmet pending a future decision to revisit the
+protected-script path.
