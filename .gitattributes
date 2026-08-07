@@ -1,2 +1,16 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Protected baseline scripts (see AGENTS.md #4): never let checkout
+# line-ending conversion alter these bytes, or sha256 verification
+# against docs/baseline/protected-scripts.sha256 will fail.
+docs/script/main.min.js -text
+docs/script/page.min.js -text
+docs/jewelry/script/main.min.js -text
+docs/jewelry/script/page.min.js -text
+docs/jewelery/script/main.min.js -text
+docs/jewelery/script/page.min.js -text
+
+# sha256sum's filename parsing breaks if this manifest itself has
+# CRLF line endings; keep it LF regardless of checkout platform.
+docs/baseline/protected-scripts.sha256 text eol=lf
