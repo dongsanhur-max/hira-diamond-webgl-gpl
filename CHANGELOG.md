@@ -11,6 +11,7 @@ All notable modifications to the upstream GPL `diamond-webgl` baseline are recor
 - Explicit GPL legal-review procedure and commercial-launch deadline.
 - Required mobile-device matrix, console/WebGL classifications, and post-T5 performance-baseline procedure.
 - Model metadata, numeric-precision, security-review, agent-ownership, and phased Cafe24/Gabia criteria.
+- Committed SHA-256 manifest and reproducible verification procedure for all six protected minified scripts.
 
 ### Changed
 

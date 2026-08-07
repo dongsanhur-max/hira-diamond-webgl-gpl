@@ -1,6 +1,6 @@
 # HIRA Diamond WebGL Test Plan
 
-Status: v1.1 — pre-implementation test contract
+Status: v1.2 — pre-implementation test contract
 Primary gate: upstream engine compatibility with one HIRA solitaire model
 
 ## 1. Purpose
@@ -157,12 +157,34 @@ Acceptance:
 
 ### T0-04 Protected baseline integrity
 
-Record hashes for the six protected minified scripts listed in `AGENTS.md`. Before and after compatibility experiments, compare those hashes.
+The committed source of truth is `docs/baseline/protected-scripts.sha256`. From the repository root, run:
+
+```bash
+sha256sum --check docs/baseline/protected-scripts.sha256
+```
+
+The command must report `OK` for all six files and exit with code 0. Record the complete output, command exit code, commit SHA, date, and tester in the test report before and after each compatibility experiment.
+
+When an explicitly approved upstream baseline replacement changes a protected script, regenerate the manifest only after reviewing the exact script diff and recording the approval:
+
+```bash
+sha256sum \
+  docs/script/main.min.js \
+  docs/script/page.min.js \
+  docs/jewelry/script/main.min.js \
+  docs/jewelry/script/page.min.js \
+  docs/jewelery/script/main.min.js \
+  docs/jewelery/script/page.min.js \
+  > docs/baseline/protected-scripts.sha256
+```
+
+Changing the manifest to make an unexplained script change pass is prohibited. The manifest and changed protected scripts must be reviewed in the same commit or pull request.
 
 Acceptance:
 
-- protected script hashes are unchanged;
-- any difference is an immediate FAIL until explicitly approved.
+- all six checks report `OK` and the command exits 0;
+- a missing file, mismatch, extra/unreviewed protected file, or non-zero exit is FAIL;
+- any approved baseline replacement includes its authorization, reason, GPL impact, and rollback plan.
 
 ## 7. T1 — Upstream runtime tests
 

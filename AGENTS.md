@@ -1,6 +1,6 @@
 # HIRA Diamond WebGL — Agent Rules
 
-Status: v1.1
+Status: v1.2
 
 These instructions apply to the entire repository.
 
@@ -93,9 +93,10 @@ For code or asset changes, run the smallest relevant checks and report exact res
 
 1. `npm run build`
 2. verify expected HTML, scripts, textures, and models exist in `dist/`
-3. run a local server when browser behavior is affected
-4. inspect browser console errors on desktop and mobile when available
-5. compare the HIRA model against the unchanged upstream sample
+3. run `sha256sum --check docs/baseline/protected-scripts.sha256` from the repository root
+4. run a local server when browser behavior is affected
+5. inspect browser console errors on desktop and mobile when available
+6. compare the HIRA model against the unchanged upstream sample
 
 Use these result labels only:
 
