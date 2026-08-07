@@ -58,7 +58,11 @@ param(
     [switch]$Once
 )
 
-$ErrorActionPreference = "Stop"
+# Deliberately not setting $ErrorActionPreference = "Stop": under Windows
+# PowerShell 5.1, native commands (git, claude) that write anything to
+# stderr get converted into terminating NativeCommandErrors under Stop,
+# which would make normal git informational output fatal. Native-command
+# failures are checked explicitly via $LASTEXITCODE instead.
 
 # $PSScriptRoot can be empty inside param() default-value expressions under
 # Windows PowerShell 5.1 when invoked via `-File`; resolve paths here instead.
@@ -95,10 +99,10 @@ function Save-State($lastReviewedSha) {
 
 function Invoke-ReviewCheck {
     Write-Log "Fetching origin/$Branch and origin/$BaseBranch ..."
-    try {
-        & git -C $RepoPath fetch origin $Branch $BaseBranch --quiet 2>$null
-    } catch {
-        Write-Log "git fetch failed: $_"
+    & git -C $RepoPath fetch origin $BaseBranch --quiet *>$null
+    & git -C $RepoPath fetch origin $Branch --quiet *>$null
+    if ($LASTEXITCODE -ne 0) {
+        Write-Log "origin/$Branch not fetchable yet (Codex likely hasn't pushed). Waiting."
         return
     }
 
