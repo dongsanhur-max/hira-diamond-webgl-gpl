@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "productId": "ring-001",
+  "title": "HIRA 오벌 솔리테어 링",
+  "revision": 1,
+  "sourceUnit": "mm",
+  "exportScale": 1.0,
+  "metalFile": "metal.obj",
+  "diamondFile": "diamond.obj",
+  "thumbnailFile": "thumbnail.jpg",
+  "metalTriangles": 4344,
+  "diamondTriangles": 742,
+  "boundingBoxMm": {
+    "x": 18.149,
+    "y": 8.100,
+    "z": 22.513
+  },
+  "exportedFrom": "3Design",
+  "exporterVersion": "3DESIGN cad Pro TShaper V2_1 Pro Retopo V11 -- 64-Bit Edition -- (Build 11.103 230724.1232)",
+  "notes": "Oval-cut center diamond solitaire, single prong-set stone, no halo/pave/side stones. Ring size set to 15mm via 3Design ring-size tool. Center stone measured 5.8mm x 8.1mm x 3.6mm (1.03ct) in CAD, matching diamond.obj bounding box. Revision 1 export had metal/diamond on opposite sides of the band (shared-origin violation); re-exported both parts from the same 3Design scene position with plane-reset disabled to fix alignment before this validation."
+}
