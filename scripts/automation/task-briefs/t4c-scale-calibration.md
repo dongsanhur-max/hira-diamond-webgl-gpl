@@ -1,7 +1,13 @@
-# Task assignment for Codex (Viewer/model role)
+# Task assignment for the Viewer/model implementer (Codex or a Claude Code session)
+
+> As of 2026-08-07 the implementer for this task is a separate Claude Code
+> session working in its own git worktree (`hira-diamond-webgl-gpl-t4c`), not
+> necessarily Codex. Everything below is written generically for whichever
+> implementer picks it up — the role and rules don't change based on which
+> product is filling it.
 
 ```text
-Agent/role: Viewer/model (Codex)
+Agent/role: Viewer/model (implementer session — Codex or Claude Code)
 Task: T4c — Calibrate the HIRA merge-adapter scale constant against a documented
   real-world reference dimension, and re-record the affected T4 checks with the
   corrected scale. This does NOT resolve the T4 material-role FAIL.
