@@ -1,0 +1,7 @@
+# Generated at runtime by watch-and-review.ps1 / watcher-control.ps1 --
+# local self-check artifacts only, not curated project evidence. See
+# ../../docs/TEST_PLAN.md for where reviewed/accepted evidence belongs.
+.state/
+.reports/
+.tmp/
+.logs/
