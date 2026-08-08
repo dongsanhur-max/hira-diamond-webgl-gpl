@@ -1,0 +1,93 @@
+{
+  "url": "http://127.0.0.1:5173/jewelry/",
+  "httpStatus": 200,
+  "initialCanvasBox": {
+    "x": 79,
+    "y": 388.4375,
+    "width": 512,
+    "height": 512
+  },
+  "canvasBoxAfterResize": {
+    "x": 194,
+    "y": 388.4375,
+    "width": 512,
+    "height": 512
+  },
+  "console": [
+    {
+      "type": "debug",
+      "text": "Shader constructor took 1.5 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.5999999940395355 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.20000000298023224 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.4000000059604645 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.5999999940395355 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.6000000089406967 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 0.9000000059604645 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='cushion' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 3.5999999940395355 ms."
+    },
+    {
+      "type": "debug",
+      "text": "Building monochrome gem shader for stone='emerald' and ray depth='4'."
+    },
+    {
+      "type": "debug",
+      "text": "Shader constructor took 88.5 ms."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x60fc001c5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x60fc001c5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "debug",
+      "text": "Retrieving of support model 'engagement-ring.obj' took 373 ms."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x60fc001c5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x60fc001c5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "chromiumVersion": "151.0.7922.34"
+}
